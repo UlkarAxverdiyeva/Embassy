@@ -1,0 +1,45 @@
+﻿#itab td, #itab th {
+    padding: .75rem !important;
+}
+.paddd {
+    padding: 20px !important;
+}
+
+.ppad {
+    margin: -8px !important;
+    font-size: 21px !important;
+    font-weight: 600 !important;
+}
+
+body {
+    background: rgb(204,204,204);
+}
+
+.table td, .table th {
+    padding: 2px !important;
+}
+
+page {
+    background: white;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 0.5cm;
+    padding: 50px;
+    box-shadow: 0 0 0.5cm rgba(0,0,0,0.5);
+}
+
+page[size="A4"] {
+    width: 21cm;
+    height: 29.7cm;
+}
+
+page[size="A4"][layout="landscape"] {
+    width: 29.7cm;
+    height: 21cm;
+}
+
+@media print {
+    header, footer, aside, nav, form, .breadcrumb, .app-footer {
+        display: none;
+    }
+}

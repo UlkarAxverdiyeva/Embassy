@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<EmbassyAPI.Models.ViewModels.News>
+@*@using Embassy.Models*@
+@{
+    var i = 1;
+}
+
+
+<div class="container-fluid ">
+    <div class="row ">
+        <div class="col-md-12">
+            <h3 style=" margin: 50px 0 45px 0">Guidelines for application of endorsement of events and projects based in Denmark.</h3>
+            <hr style="width: 800px;border-color:red;margin-left:0" />
+
+            @foreach (var item in Model)
+            {
+                <h3>
+                    @item.NEWSTITLE
+                </h3>
+                <div>
+                    @item.NEWSCONTENT
+                </div>
+
+            }
+        </div>
+    </div>
+</div>

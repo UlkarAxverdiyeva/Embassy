@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="embassyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="NEWS">
+    <Key>
+      <PropertyRef Name="NEWSID" />
+    </Key>
+    <Property Name="NEWSID" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NEWSTITLE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NEWSCONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DATEPOSTED" Type="DateTime" />
+    <Property Name="DATEMODIFIED" Type="DateTime" />
+    <Property Name="ISDELETED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="AUTHORID" Type="Decimal" Precision="38" Scale="0" />
+    <Property Name="ISARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="NEWSAUTHOR" Relationship="Self.SYS_C00126616" FromRole="NEWS" ToRole="NEWSAUTHORS" />
+  </EntityType>
+  <EntityType Name="NEWSAUTHOR">
+    <Key>
+      <PropertyRef Name="AUTHORID" />
+    </Key>
+    <Property Name="AUTHORID" Type="Decimal" Precision="38" Scale="0" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AUTHORNAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+    <Property Name="AUTHOREMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ISACTIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="NEWS" Relationship="Self.SYS_C00126616" FromRole="NEWSAUTHORS" ToRole="NEWS" />
+  </EntityType>
+  <Association Name="SYS_C00126616">
+    <End Role="NEWSAUTHORS" Type="Self.NEWSAUTHOR" Multiplicity="0..1" />
+    <End Role="NEWS" Type="Self.NEWS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWSAUTHORS">
+        <PropertyRef Name="AUTHORID" />
+      </Principal>
+      <Dependent Role="NEWS">
+        <PropertyRef Name="AUTHORID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="embassyEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="NEWS" EntityType="Self.NEWS" />
+    <EntitySet Name="NEWSAUTHORS" EntityType="Self.NEWSAUTHOR" />
+    <AssociationSet Name="SYS_C00126616" Association="Self.SYS_C00126616">
+      <End Role="NEWSAUTHORS" EntitySet="NEWSAUTHORS" />
+      <End Role="NEWS" EntitySet="NEWS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

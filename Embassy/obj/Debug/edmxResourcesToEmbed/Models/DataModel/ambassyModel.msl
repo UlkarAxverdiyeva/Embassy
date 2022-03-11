@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="embassyModelStoreContainer" CdmEntityContainer="embassyEntities">
+    <EntitySetMapping Name="NEWS">
+      <EntityTypeMapping TypeName="embassyModel.NEWS">
+        <MappingFragment StoreEntitySet="NEWS">
+          <ScalarProperty Name="NEWSID" ColumnName="NEWSID" />
+          <ScalarProperty Name="NEWSTITLE" ColumnName="NEWSTITLE" />
+          <ScalarProperty Name="NEWSCONTENT" ColumnName="NEWSCONTENT" />
+          <ScalarProperty Name="DATEPOSTED" ColumnName="DATEPOSTED" />
+          <ScalarProperty Name="DATEMODIFIED" ColumnName="DATEMODIFIED" />
+          <ScalarProperty Name="ISDELETED" ColumnName="ISDELETED" />
+          <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+          <ScalarProperty Name="ISARCHIVE" ColumnName="ISARCHIVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWSAUTHORS">
+      <EntityTypeMapping TypeName="embassyModel.NEWSAUTHOR">
+        <MappingFragment StoreEntitySet="NEWSAUTHORS">
+          <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+          <ScalarProperty Name="AUTHORNAME" ColumnName="AUTHORNAME" />
+          <ScalarProperty Name="AUTHOREMAIL" ColumnName="AUTHOREMAIL" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

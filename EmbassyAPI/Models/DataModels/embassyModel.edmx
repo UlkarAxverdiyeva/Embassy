@@ -1,0 +1,236 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="embassyModel.Store" Provider="Oracle.DataAccess.Client" ProviderManifestToken="12.1" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="NEWS">
+          <Key>
+            <PropertyRef Name="NEWSID" />
+          </Key>
+          <Property Name="NEWSID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NEWSTITLE" Type="nvarchar2" MaxLength="200" />
+          <Property Name="NEWSCONTENT" Type="nclob" />
+          <Property Name="DATEPOSTED" Type="date" />
+          <Property Name="DATEMODIFIED" Type="date" />
+          <Property Name="ISDELETED" Type="char" MaxLength="1" />
+          <Property Name="AUTHORID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ISARCHIVE" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="NEWS_LOGO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="TITLE" Type="nvarchar2" MaxLength="250" />
+          <Property Name="CONTENT" Type="nclob" />
+          <Property Name="DATEPOSTED" Type="date" />
+          <Property Name="DATEMODIFIED" Type="date" />
+          <Property Name="AUTHORID" Type="number" Precision="38" Scale="0" />
+          <Property Name="ISARCHIVED" Type="char" MaxLength="1" />
+          <Property Name="ISDELETED" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="NEWSAUTHORS">
+          <Key>
+            <PropertyRef Name="AUTHORID" />
+          </Key>
+          <Property Name="AUTHORID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AUTHORNAME" Type="nvarchar2" MaxLength="150" />
+          <Property Name="AUTHOREMAIL" Type="nvarchar2" MaxLength="100" />
+          <Property Name="USERNAME" Type="nvarchar2" MaxLength="100" />
+          <Property Name="PASSWORD" Type="nvarchar2" MaxLength="100" />
+          <Property Name="ISACTIVE" Type="char" MaxLength="1" />
+          <Property Name="ROLES" Type="nvarchar2" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_LOGO">
+          <End Role="NEWSAUTHORS" Type="Self.NEWSAUTHORS" Multiplicity="0..1" />
+          <End Role="NEWS_LOGO" Type="Self.NEWS_LOGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSAUTHORS">
+              <PropertyRef Name="AUTHORID" />
+            </Principal>
+            <Dependent Role="NEWS_LOGO">
+              <PropertyRef Name="AUTHORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="SYS_C00126616">
+          <End Role="NEWSAUTHORS" Type="Self.NEWSAUTHORS" Multiplicity="0..1" />
+          <End Role="NEWS" Type="Self.NEWS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSAUTHORS">
+              <PropertyRef Name="AUTHORID" />
+            </Principal>
+            <Dependent Role="NEWS">
+              <PropertyRef Name="AUTHORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="embassyModelStoreContainer">
+          <EntitySet Name="NEWS" EntityType="Self.NEWS" Schema="MP" store:Type="Tables" />
+          <EntitySet Name="NEWS_LOGO" EntityType="Self.NEWS_LOGO" Schema="MP" store:Type="Tables" />
+          <EntitySet Name="NEWSAUTHORS" EntityType="Self.NEWSAUTHORS" Schema="MP" store:Type="Tables" />
+          <AssociationSet Name="FK_LOGO" Association="Self.FK_LOGO">
+            <End Role="NEWSAUTHORS" EntitySet="NEWSAUTHORS" />
+            <End Role="NEWS_LOGO" EntitySet="NEWS_LOGO" />
+          </AssociationSet>
+          <AssociationSet Name="SYS_C00126616" Association="Self.SYS_C00126616">
+            <End Role="NEWSAUTHORS" EntitySet="NEWSAUTHORS" />
+            <End Role="NEWS" EntitySet="NEWS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="embassyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="embassyEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="NEWS" EntityType="embassyModel.NEWS" />
+          <EntitySet Name="NEWS_LOGO" EntityType="embassyModel.NEWS_LOGO" />
+          <EntitySet Name="NEWSAUTHORS" EntityType="embassyModel.NEWSAUTHOR" />
+          <AssociationSet Name="SYS_C00126616" Association="embassyModel.SYS_C00126616">
+            <End Role="NEWSAUTHOR" EntitySet="NEWSAUTHORS" />
+            <End Role="NEWS" EntitySet="NEWS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOGO" Association="embassyModel.FK_LOGO">
+            <End Role="NEWSAUTHOR" EntitySet="NEWSAUTHORS" />
+            <End Role="NEWS_LOGO" EntitySet="NEWS_LOGO" />
+          </AssociationSet>
+          </EntityContainer>
+        <EntityType Name="NEWS">
+          <Key>
+            <PropertyRef Name="NEWSID" />
+          </Key>
+          <Property Name="NEWSID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NEWSTITLE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="NEWSCONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DATEPOSTED" Type="DateTime" />
+          <Property Name="DATEMODIFIED" Type="DateTime" />
+          <Property Name="ISDELETED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="AUTHORID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ISARCHIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="NEWSAUTHOR" Relationship="embassyModel.SYS_C00126616" FromRole="NEWS" ToRole="NEWSAUTHOR" />
+        </EntityType>
+        <EntityType Name="NEWS_LOGO">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="TITLE" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Name="CONTENT" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DATEPOSTED" Type="DateTime" />
+          <Property Name="DATEMODIFIED" Type="DateTime" />
+          <Property Name="AUTHORID" Type="Decimal" Precision="38" Scale="0" />
+          <Property Name="ISARCHIVED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ISDELETED" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="NEWSAUTHOR" Relationship="embassyModel.FK_LOGO" FromRole="NEWS_LOGO" ToRole="NEWSAUTHOR" />
+        </EntityType>
+        <EntityType Name="NEWSAUTHOR">
+          <Key>
+            <PropertyRef Name="AUTHORID" />
+          </Key>
+          <Property Name="AUTHORID" Type="Decimal" Nullable="false" Precision="38" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AUTHORNAME" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="AUTHOREMAIL" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="USERNAME" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PASSWORD" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="ISACTIVE" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <Property Name="ROLES" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="NEWS" Relationship="embassyModel.SYS_C00126616" FromRole="NEWSAUTHOR" ToRole="NEWS" />
+          <NavigationProperty Name="NEWS_LOGO" Relationship="embassyModel.FK_LOGO" FromRole="NEWSAUTHOR" ToRole="NEWS_LOGO" />
+        </EntityType>
+        <Association Name="SYS_C00126616">
+          <End Type="embassyModel.NEWSAUTHOR" Role="NEWSAUTHOR" Multiplicity="0..1" />
+          <End Type="embassyModel.NEWS" Role="NEWS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSAUTHOR">
+              <PropertyRef Name="AUTHORID" />
+            </Principal>
+            <Dependent Role="NEWS">
+              <PropertyRef Name="AUTHORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOGO">
+          <End Type="embassyModel.NEWSAUTHOR" Role="NEWSAUTHOR" Multiplicity="0..1" />
+          <End Type="embassyModel.NEWS_LOGO" Role="NEWS_LOGO" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NEWSAUTHOR">
+              <PropertyRef Name="AUTHORID" />
+            </Principal>
+            <Dependent Role="NEWS_LOGO">
+              <PropertyRef Name="AUTHORID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="embassyModelStoreContainer" CdmEntityContainer="embassyEntities">
+          <EntitySetMapping Name="NEWS">
+            <EntityTypeMapping TypeName="embassyModel.NEWS">
+              <MappingFragment StoreEntitySet="NEWS">
+                <ScalarProperty Name="ISARCHIVE" ColumnName="ISARCHIVE" />
+                <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+                <ScalarProperty Name="ISDELETED" ColumnName="ISDELETED" />
+                <ScalarProperty Name="DATEMODIFIED" ColumnName="DATEMODIFIED" />
+                <ScalarProperty Name="DATEPOSTED" ColumnName="DATEPOSTED" />
+                <ScalarProperty Name="NEWSCONTENT" ColumnName="NEWSCONTENT" />
+                <ScalarProperty Name="NEWSTITLE" ColumnName="NEWSTITLE" />
+                <ScalarProperty Name="NEWSID" ColumnName="NEWSID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWS_LOGO">
+            <EntityTypeMapping TypeName="embassyModel.NEWS_LOGO">
+              <MappingFragment StoreEntitySet="NEWS_LOGO">
+                <ScalarProperty Name="ISDELETED" ColumnName="ISDELETED" />
+                <ScalarProperty Name="ISARCHIVED" ColumnName="ISARCHIVED" />
+                <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+                <ScalarProperty Name="DATEMODIFIED" ColumnName="DATEMODIFIED" />
+                <ScalarProperty Name="DATEPOSTED" ColumnName="DATEPOSTED" />
+                <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+                <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="NEWSAUTHORS">
+            <EntityTypeMapping TypeName="embassyModel.NEWSAUTHOR">
+              <MappingFragment StoreEntitySet="NEWSAUTHORS">
+                <ScalarProperty Name="ROLES" ColumnName="ROLES" />
+                <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+                <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+                <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+                <ScalarProperty Name="AUTHOREMAIL" ColumnName="AUTHOREMAIL" />
+                <ScalarProperty Name="AUTHORNAME" ColumnName="AUTHORNAME" />
+                <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

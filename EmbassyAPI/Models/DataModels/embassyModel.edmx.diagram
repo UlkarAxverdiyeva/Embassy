@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="38107eb001e64349a57e78b41eb57303" Name="Diagram1">
+        <EntityTypeShape EntityType="embassyModel.NEWS" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="embassyModel.NEWS_LOGO" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="embassyModel.NEWSAUTHOR" Width="1.5" PointX="0.75" PointY="2.875" />
+        <AssociationConnector Association="embassyModel.SYS_C00126616" />
+        <AssociationConnector Association="embassyModel.FK_LOGO" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

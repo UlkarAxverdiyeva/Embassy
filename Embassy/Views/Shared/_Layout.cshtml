@@ -1,0 +1,91 @@
+﻿
+@{
+    List<string> selectList = new List<string>() { "English", "Japanese" };
+}
+@*<title>@ViewBag.Title - My ASP.NET Application</title>*@
+@Styles.Render("~/Content/css/Style.css")
+@Styles.Render("~/Content/bootstrap.min.css")
+@Scripts.Render("~/bundles/modernizr")
+@RenderSection("JSscripts", required: false)
+@RenderSection("CSSstyles", required: false)
+
+
+<div class="container-fluid">
+    <div class="row ">
+        @*<div class="header">*@
+            <div class="col-md-6  "  style="z-index:1">
+                <img src="~/Img/Flag_of_Japan_(bordered).svg.png" alt="Japanese Flag" class="img mr-2" />
+                <h6 class="mt-4 ">Embassy of Japan in Denmark</h6>
+            </div>
+            <div class="col-md-4 mb-1" style="z-index:1">
+                @Html.DropDownList("languages", new List<SelectListItem>
+                {
+                      new SelectListItem { Text = "English", Value = "1" },
+                      new SelectListItem { Text = "Japanese", Value = "2"}
+                }, "Select language", new { @class = "form-control ", @style = "width:160px;float:right;margin-top:15px" })
+            </div>
+            <div class="col-md-2 ">
+            </div>
+        @*</div>*@
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 banner-section">
+            <div class="logo-div">
+                <img src="~/Img/logo-roed.png" class="position-absolute">
+            </div>
+            <div class="banner-img">
+                <img src="~/Img/2500x1700-3.png" alt="tokio" class="img-fluid" />
+            </div>
+            <div class="banner-text">
+                <div class="banner-text-area">
+                    <p class="text-justify ">
+                        <br />
+                        Thank you for visiting the official website for the 150th Anniversary of Japan-Denmark Diplomatic Relations
+                        <br /><br />
+                        In 2017, Japan and Denmark will celebrate 150 years of diplomatic relations with the conclusion of the ”Treaty of Friendship, Commerce and Navigation between Japan and Denmark” in 1867. Since then, Japan and Denmark have nurtured a longstanding friendship as two countries that share such similarities as respectively having had an imperial house and a royal family throughout their long histories. There are many events scheduled to happen in order to celebrate this long, positive relationship.
+                        With the opening ceremony in January as a start, a wide range of events are scheduled to take place covering such fields as culture, politics, economics, academic and sports. We hope that many people and institutions from both the public and private sectors will participate in the celebration and be part of people-to-people exchanges. Through such exchanges, we hope that we will see the relationship between our two countries deepened and strengthened in the future.
+                        <br /><br />
+                        You can also find information about the official logo on this website. The logo was created through the collaboration between a Danish and a Japanese designer to officially endorse the events. The official events will be listed in the event calendar on this website. Please find further information <a href="https://www.dk.emb-japan.go.jp/150/official-logo.html" class="text-danger">here</a> .
+                        We appreciate your support and cooperation to make the special year a memorable and successful one.
+                        <br />
+                    <p class="text-right">Embassy of Japan in Denmark</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-3">
+            @Html.Partial("~/Views/Shared/PartialMenu.cshtml")
+        </div>
+        <div class="col-md-9">
+            @RenderBody()
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid bg-light">
+    <div class="row">
+        <div class="col-md-12 text-center footer-css"> 
+                <p class="mb-0 mt-3">
+                    <b> The Embassy of Japan in Denmark</b> · E-Mail: info.cph@ch.mofa.go.jp · Tel: +45 3345 51 21
+                </p> 
+        </div>
+    </div>
+</div>
+
+<!--<div class="container body-content">
+    <!--<hr />-->
+@*<footer>
+        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>*@
+@*</div>*@
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+

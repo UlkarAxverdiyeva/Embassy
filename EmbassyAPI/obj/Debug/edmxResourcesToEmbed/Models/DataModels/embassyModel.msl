@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="embassyModelStoreContainer" CdmEntityContainer="embassyEntities">
+    <EntitySetMapping Name="NEWS">
+      <EntityTypeMapping TypeName="embassyModel.NEWS">
+        <MappingFragment StoreEntitySet="NEWS">
+          <ScalarProperty Name="ISARCHIVE" ColumnName="ISARCHIVE" />
+          <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+          <ScalarProperty Name="ISDELETED" ColumnName="ISDELETED" />
+          <ScalarProperty Name="DATEMODIFIED" ColumnName="DATEMODIFIED" />
+          <ScalarProperty Name="DATEPOSTED" ColumnName="DATEPOSTED" />
+          <ScalarProperty Name="NEWSCONTENT" ColumnName="NEWSCONTENT" />
+          <ScalarProperty Name="NEWSTITLE" ColumnName="NEWSTITLE" />
+          <ScalarProperty Name="NEWSID" ColumnName="NEWSID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWS_LOGO">
+      <EntityTypeMapping TypeName="embassyModel.NEWS_LOGO">
+        <MappingFragment StoreEntitySet="NEWS_LOGO">
+          <ScalarProperty Name="ISDELETED" ColumnName="ISDELETED" />
+          <ScalarProperty Name="ISARCHIVED" ColumnName="ISARCHIVED" />
+          <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+          <ScalarProperty Name="DATEMODIFIED" ColumnName="DATEMODIFIED" />
+          <ScalarProperty Name="DATEPOSTED" ColumnName="DATEPOSTED" />
+          <ScalarProperty Name="CONTENT" ColumnName="CONTENT" />
+          <ScalarProperty Name="TITLE" ColumnName="TITLE" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NEWSAUTHORS">
+      <EntityTypeMapping TypeName="embassyModel.NEWSAUTHOR">
+        <MappingFragment StoreEntitySet="NEWSAUTHORS">
+          <ScalarProperty Name="ROLES" ColumnName="ROLES" />
+          <ScalarProperty Name="ISACTIVE" ColumnName="ISACTIVE" />
+          <ScalarProperty Name="PASSWORD" ColumnName="PASSWORD" />
+          <ScalarProperty Name="USERNAME" ColumnName="USERNAME" />
+          <ScalarProperty Name="AUTHOREMAIL" ColumnName="AUTHOREMAIL" />
+          <ScalarProperty Name="AUTHORNAME" ColumnName="AUTHORNAME" />
+          <ScalarProperty Name="AUTHORID" ColumnName="AUTHORID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="embassyModel.Store" Provider="Oracle.ManagedDataAccess.Client" ProviderManifestToken="18.0" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="NEWS">
+    <Key>
+      <PropertyRef Name="NEWSID" />
+    </Key>
+    <Property Name="NEWSID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="NEWSTITLE" Type="nvarchar2" MaxLength="200" />
+    <Property Name="NEWSCONTENT" Type="nclob" />
+    <Property Name="DATEPOSTED" Type="date" />
+    <Property Name="DATEMODIFIED" Type="date" />
+    <Property Name="ISDELETED" Type="char" MaxLength="1" />
+    <Property Name="AUTHORID" Type="number" Precision="38" Scale="0" />
+    <Property Name="ISARCHIVE" Type="char" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="NEWSAUTHORS">
+    <Key>
+      <PropertyRef Name="AUTHORID" />
+    </Key>
+    <Property Name="AUTHORID" Type="number" Precision="38" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AUTHORNAME" Type="nvarchar2" MaxLength="150" />
+    <Property Name="AUTHOREMAIL" Type="nvarchar2" MaxLength="100" />
+    <Property Name="USERNAME" Type="nvarchar2" MaxLength="100" />
+    <Property Name="PASSWORD" Type="nvarchar2" MaxLength="100" />
+    <Property Name="ISACTIVE" Type="char" MaxLength="1" />
+  </EntityType>
+  <Association Name="SYS_C00126616">
+    <End Role="NEWSAUTHORS" Type="Self.NEWSAUTHORS" Multiplicity="0..1" />
+    <End Role="NEWS" Type="Self.NEWS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="NEWSAUTHORS">
+        <PropertyRef Name="AUTHORID" />
+      </Principal>
+      <Dependent Role="NEWS">
+        <PropertyRef Name="AUTHORID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="embassyModelStoreContainer">
+    <EntitySet Name="NEWS" EntityType="Self.NEWS" Schema="MP" store:Type="Tables" />
+    <EntitySet Name="NEWSAUTHORS" EntityType="Self.NEWSAUTHORS" Schema="MP" store:Type="Tables" />
+    <AssociationSet Name="SYS_C00126616" Association="Self.SYS_C00126616">
+      <End Role="NEWSAUTHORS" EntitySet="NEWSAUTHORS" />
+      <End Role="NEWS" EntitySet="NEWS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

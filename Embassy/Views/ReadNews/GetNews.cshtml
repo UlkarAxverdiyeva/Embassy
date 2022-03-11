@@ -1,0 +1,15 @@
+﻿@model IEnumerable<EmbassyAPI.Models.ViewModels.News>
+
+<h3>Latest News</h3>
+<hr class="line" />
+@foreach (var item in Model)
+{
+    <p> @item.NEWSTITLE </p>
+    <p> Date : @item.DATEPOSTED.ToString("d MMMM yyyy")</p>
+    <button class="rounded btn-danger" data-toggle="collapse" data-target="#@string.Concat(item.ISDELETED,item.NEWSID)">+</button>
+    <div id="@string.Concat(item.ISDELETED,item.NEWSID)" class="collapse">
+        @item.NEWSCONTENT
+    </div>
+    <hr style="border-color:red;margin-left:0" />
+
+} 

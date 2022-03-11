@@ -1,0 +1,119 @@
+﻿k@model Embassy.Models.ViewModels.NewsInfo
+k@model Embassy.Models.ViewModels.NewsInfo
+
+@{
+    ViewBag.Title = "UpdateNews";
+    Layout = "~/Views/Shared/RenderSectionLayout.cshtml";
+}
+
+<h2>UpdateNews</h2>
+
+@using (Html.BeginForm("DeleteNews", "Admin", FormMethod.Post, new { @class = "NewsUpdate" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal ">
+        <hr />
+        <div class="row">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @foreach (var item in Model.newsInfo)
+            {
+                <div class="col-md-3 mb-5">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                @*@Html.LabelFor(model => item.NEWSTITLE, htmlAttributes: new { @class = "control-label mr-5" })*@
+                                @Html.TextBoxFor(model => item.NEWSTITLE, new { @class = "form-control", Name = "NEWSTITLE", @readonly = "readonly" })
+                                @Html.ValidationMessageFor(model => item.NEWSTITLE, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group">
+                                @*@Html.LabelFor(model => item.NEWSCONTENT, new { @class = "control-label" })*@
+                                @Html.TextBoxFor(model => item.NEWSCONTENT, new { @class = "form-control ", Name = "NEWSCONTENT", @readonly = "readonly", style = " height:auto%;" })
+                                @Html.ValidationMessageFor(model => item.NEWSCONTENT, "", new { @class = "text-danger" })
+                            </div>
+                            @Html.HiddenFor(model => item.NEWSID, new { Name = "NEWSID" })
+                            @Html.HiddenFor(model => item.ISDELETED, new { Name = "ISDELETED" })
+                            @Html.HiddenFor(model => item.ISARCHIVE, new { Name = "ISARCHIVE" })
+                            @Html.HiddenFor(model => item.DATEPOSTED, new { Name = "DATEPOSTED" })
+                            @Html.HiddenFor(model => item.DATEMODIFIED, new { Name = "DATEMODIFIED" })
+                            @Html.HiddenFor(model => item.AUTHORID, new { Name = "AUTHORID" })
+                        </div>
+                        <div class="card-footer">
+                            <div class="col-md-10">
+                                <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#myModal" onclick="loadData(@item.NEWSID)"> Edit</button>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" class="btn btn-info" @*form="NewsUpdate"*@ onclick="Delete(@item.NEWSID)"> Delete</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+<h2>AddNews</h2>
+<hr />
+<div class="row">
+
+</div>
+<button class="btn btn-success" onclick="location.href='@Url.Action("AddNewsView","Admin")'">Add News</button>
+@*@Html.Action("AddNewsView")
+    @Html.ActionLink("AddNewsView","AddNewsView")*@
+
+
+
+
+<script>
+    function Delete(id) {
+        $.ajax({
+            data: { id: id },
+            url : '@Url.Action("DeleteNews", "Admin")',
+          /*  data: $('.NewsUpdate').serialize(),*/
+             type: 'POST',
+             success: function (result) {
+                 if (result != "Fail")
+                     window.location.href = "UpdateNews"
+             }
+        })
+    }
+
+    function loadData(id) {
+        $('#overlay').fadeIn();
+        $.ajax({
+            data: { id: id },
+            url: '@Url.Action("LoadData", "Admin")',
+            type: 'GET',
+            success: function (data) {
+                $('#Result').html(data);
+                $('#ForInfo').modal('show');
+                $('#overlay').fadeOut();
+            }
+        })
+    }
+
+
+
+</script>
+
+
+<div class="modal fade in  bd-example-modal-xl" id="ForInfo" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content" id="Result">
+
+        </div>
+    </div>
+</div>
+
+
+@section JSscripts{
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@7.12.15/dist/sweetalert2.all.min.js"></script>
+
+}
+
+@section CSSstyles{
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+}
